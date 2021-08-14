@@ -7,7 +7,6 @@ import Input from '../Input/Input';
 import Messages from '../Messages/Messages';
 
 let socket;
-
 const Chat = ({ data: { name, room } }) => {
    const [message, setMessage] = useState('');
    const [messages, setMessages] = useState([]);
@@ -16,6 +15,11 @@ const Chat = ({ data: { name, room } }) => {
 
    useEffect(() => {
       socket = io(SOCKET_SERVER);
+
+      const getMessagesFromLocalStorage = localStorage.getItem('messages');
+      if (getMessagesFromLocalStorage) {
+         setMessages(JSON.parse(getMessagesFromLocalStorage));
+      }
 
       socket.emit('join', { name, room }, (error) => {
          if (error) {
@@ -33,6 +37,8 @@ const Chat = ({ data: { name, room } }) => {
       socket.on('message', (message) => {
          setMessages([...messages, message]);
       });
+
+      localStorage.setItem('messages', JSON.stringify(messages));
    }, [messages]);
 
    const sendMessage = (event) => {

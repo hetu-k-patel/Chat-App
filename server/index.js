@@ -21,8 +21,6 @@ app.use(cors());
 app.use(router);
 
 io.on('connection', (socket) => {
-   console.log('New Connection Occured.');
-
    socket.on('join', ({ name, room }, callback) => {
       const { user, error } = addUser({ id: socket.id, name, room });
 
@@ -30,7 +28,7 @@ io.on('connection', (socket) => {
 
       socket.emit('message', {
          user: 'admin',
-         text: `${user.name}, Welcome to the room ${user.room}!`,
+         text: `${user.name}, Welcome to the "${user.room}" room!`,
       });
 
       socket.broadcast

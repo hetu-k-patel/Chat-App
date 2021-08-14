@@ -7,17 +7,13 @@ import './App.css';
 
 const App = () => {
    const [isLogin, setIsLogin] = useState(false);
-   const [data, setData] = useState({});
+   const storageData = JSON.parse(localStorage.getItem('chatStorage'));
 
-   return (
-      <>
-         {!isLogin ? (
-            <Join setData={setData} setIsLogin={setIsLogin} />
-         ) : (
-            <Chat data={data} />
-         )}
-      </>
-   );
+   if (!storageData) {
+      return <Join setIsLogin={setIsLogin} />;
+   } else {
+      return <Chat data={storageData} />;
+   }
 };
 
 export default App;

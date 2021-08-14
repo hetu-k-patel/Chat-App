@@ -4,7 +4,7 @@
    justify-content: space-between;
    background: #4c4c6d;
    border-radius: 4px 4px 0 0;
-   height: 50px;
+   height: 60px;
    width: 100%;
 }
 
@@ -25,4 +25,11 @@
 
 .onlineIcon {
    margin-right: 5%;
+}
+
+.closeChat {
+   background: none;
+   border: none;
+   outline: none;
+   cursor: pointer;
 }
