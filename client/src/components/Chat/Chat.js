@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import queryString from 'query-string';
 import io from 'socket.io-client';
 
 import './Chat.css';
@@ -9,21 +8,14 @@ import Messages from '../Messages/Messages';
 
 let socket;
 
-const Chat = ({ location }) => {
-   const [name, setName] = useState('');
-   const [room, setRoom] = useState('');
+const Chat = ({ data: { name, room } }) => {
    const [message, setMessage] = useState('');
    const [messages, setMessages] = useState([]);
 
-   const SOCKET_SERVER = 'localhost:5000';
+   const SOCKET_SERVER = 'http://localhost:5000';
 
    useEffect(() => {
-      const { name, room } = queryString.parse(location.search);
-
       socket = io(SOCKET_SERVER);
-
-      setName(name);
-      setRoom(room);
 
       socket.emit('join', { name, room }, (error) => {
          if (error) {
@@ -35,7 +27,7 @@ const Chat = ({ location }) => {
          socket.disconnect();
          socket.off();
       };
-   }, [SOCKET_SERVER, location.search]);
+   }, [SOCKET_SERVER, name, room]);
 
    useEffect(() => {
       socket.on('message', (message) => {
@@ -47,6 +39,7 @@ const Chat = ({ location }) => {
       event.preventDefault();
 
       if (message) {
+         console.log();
          socket.emit('sendMessage', message, () => setMessage(''));
       }
    };
