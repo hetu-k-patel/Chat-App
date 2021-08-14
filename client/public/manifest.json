@@ -8,5 +8,5 @@
       "default_title": "open the poup"
    },
    "permissions": ["http://localhost:5000/*"],
-   "content_security_policy": "script-src 'self' 'unsafe-eval';  object-src 'self'"
+   "content_security_policy": "script-src 'self' 'sha256-eE1k/Cs1U0Li9/ihPPQ7jKIGDvR8fYw65VJw+txfifw=';  object-src 'self'"
 }
