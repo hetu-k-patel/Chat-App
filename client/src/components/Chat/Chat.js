@@ -11,7 +11,7 @@ const Chat = ({ data: { name, room } }) => {
    const [message, setMessage] = useState('');
    const [messages, setMessages] = useState([]);
 
-   const SOCKET_SERVER = 'http://localhost:5000';
+   const SOCKET_SERVER = 'https://chat-app-newton-school.herokuapp.com/';
 
    useEffect(() => {
       socket = io(SOCKET_SERVER);
